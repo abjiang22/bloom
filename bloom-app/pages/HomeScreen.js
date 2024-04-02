@@ -4,12 +4,12 @@ import {styles} from './AppStyles';
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
 
-function HomePage({navigation}) {
+function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
-      <Logo />
+      
     </View>
   );
 }
 
-export default HomePage;
+export default HomeScreen;
