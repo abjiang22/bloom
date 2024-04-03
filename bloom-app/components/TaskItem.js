@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 const TaskItem = ({ task, isChecked, toggleTask }) => {
@@ -14,7 +14,6 @@ const TaskItem = ({ task, isChecked, toggleTask }) => {
         </View>
     );
 };
-
   
 const styles = StyleSheet.create({
   taskItem: {
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textDecorationLine: 'line-through',
   },
-
 });
 
 export default TaskItem;

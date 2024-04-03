@@ -1,11 +1,9 @@
-import {StatusBar} from 'expo-status-bar';
-import {View, Image} from 'react-native';
+import {View} from 'react-native';
 import {styles} from './AppStyles';
-import SimpleButton from '../components/SimpleButton';
-import Logo from '../components/Logo';
 import GalleryPanel from '../components/GalleryPanel'
 import React, { useState } from 'react';
 
+// Dummy Data
 const taskData = {
   'My': ['Task 3', 'Task 4'],
   'Cassie': ['Task 5', 'Task 6'],
@@ -13,10 +11,9 @@ const taskData = {
   'Wendy': ['Task 9', 'Task 10'],
 };
 
-function HomeScreen({navigation}) {
-  const [tasks, setTasks] = useState(taskData);
+function HomeScreen() {
+  // Keep track of task states
   const [checkedTasks, setCheckedTasks] = useState({});
-
   const toggleTask = (taskName) => {
     setCheckedTasks(prevState => ({
       ...prevState,
@@ -25,6 +22,7 @@ function HomeScreen({navigation}) {
   };
 
   return (
+    // Task lists
     <View style={styles.galleryContainer}>
       <View style={styles.gallery}>
       <GalleryPanel data={taskData} checkedTasks={checkedTasks} toggleTask={toggleTask}/>

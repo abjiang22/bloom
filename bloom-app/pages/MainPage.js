@@ -1,8 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Icons
 import homeLined from '../assets/home-lined.png';
@@ -14,7 +12,7 @@ import socialSolid from '../assets/social-solid.png';
 import profileLined from '../assets/profile-lined.png';
 import profileSolid from '../assets/profile-solid.png';
 
-// Screens
+// Main user screens
 import HomeScreen from './HomeScreen';
 import ScheduleScreen from './ScheduleScreen';
 import SocialScreen from './SocialScreen';
@@ -24,6 +22,7 @@ const Tab = createBottomTabNavigator();
 
 export default function MainPage() {
     return (
+      // Navbar
       <Tab.Navigator
         initialRouteName='Home'
         screenOptions={({ route }) => ({
