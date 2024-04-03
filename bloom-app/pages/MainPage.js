@@ -28,6 +28,7 @@ export default function MainPage() {
         initialRouteName='Home'
         screenOptions={({ route }) => ({
             tabBarShowLabel: false,
+            headerShown: false,
             tabBarIcon: ({ focused }) => {
                 let iconSource;
                 switch (route.name) {
@@ -53,7 +54,7 @@ export default function MainPage() {
             borderTopColor: '#2D6A6E',
             marginBottom: 10
           },
-          tabBarIconStyle: { marginBottom: 10, marginTop: 20}
+          tabBarIconStyle: {marginBottom: 10, marginTop: 30}
         })}
       >
       <Tab.Screen name="Home" component={HomeScreen} />

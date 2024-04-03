@@ -13,4 +13,12 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
     },
+    galleryContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    gallery: {
+        height: '70%',
+        width: '100%',
+    }
 });
