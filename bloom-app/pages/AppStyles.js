@@ -13,12 +13,25 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
     },
+    
+    plantContainer: {
+        justifyContent: 'flex-start',
+        alignItems: 'center', 
+        paddingTop: 70,
+        paddingBottom: 0,
+        width: '100%',
+    },
+
     galleryContainer: {
         flex: 1,
         justifyContent: 'flex-end',
+        padding: 0,
+        marginTop: -300,
     },
     gallery: {
         height: '70%',
         width: '100%',
-    }
+    },
+
+   
 });

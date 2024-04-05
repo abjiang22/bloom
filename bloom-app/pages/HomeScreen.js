@@ -1,7 +1,8 @@
-import {View} from 'react-native';
+import { View, Text } from 'react-native';
 import {styles} from './AppStyles';
-import GalleryPanel from '../components/GalleryPanel'
+import GalleryPanel from '../components/GalleryPanel';
 import React, { useState } from 'react';
+import Plant from '../components/Plant';
 
 // Dummy Data
 const taskData = {
@@ -21,11 +22,27 @@ function HomeScreen() {
     }));
   };
 
+  const calculateCompletionPercentage = () => {
+    const totalTasks = Object.values(taskData).flat().length;
+    const completedTasks = Object.values(checkedTasks).filter(Boolean).length;
+    return (completedTasks / totalTasks) * 100; 
+  };
+
+  const completionPercentage = calculateCompletionPercentage();
+
   return (
     // Task lists
-    <View style={styles.galleryContainer}>
-      <View style={styles.gallery}>
-      <GalleryPanel data={taskData} checkedTasks={checkedTasks} toggleTask={toggleTask}/>
+    <View style={styles.container}>
+        <Text style={styles.completionText}>
+        {`${completionPercentage.toFixed(0)}%`}
+        </Text>
+      <View style={styles.plantContainer}>
+        <Plant completionPercentage={completionPercentage} />
+      </View>
+      <View style={styles.galleryContainer}>
+        <View style={styles.gallery}>
+          <GalleryPanel data={taskData} checkedTasks={checkedTasks} toggleTask={toggleTask}/>
+        </View>
       </View>
     </View>
   );
