@@ -3,6 +3,8 @@ import {styles} from './AppStyles';
 import GalleryPanel from '../components/GalleryPanel';
 import React, { useState } from 'react';
 import Plant from '../components/Plant';
+import CompletionPercentage from '../components/CompletionPercent';
+import AllTasksImage from '../components/AllTasks';
 
 // Dummy Data
 const taskData = {
@@ -12,9 +14,12 @@ const taskData = {
   'Wendy': ['Task 9', 'Task 10'],
 };
 
+
+
 function HomeScreen() {
   // Keep track of task states
   const [checkedTasks, setCheckedTasks] = useState({});
+  const [activeViewIndex, setActiveViewIndex] = useState(0); 
   const toggleTask = (taskName) => {
     setCheckedTasks(prevState => ({
       ...prevState,
@@ -22,26 +27,44 @@ function HomeScreen() {
     }));
   };
 
-  const calculateCompletionPercentage = () => {
-    const totalTasks = Object.values(taskData).flat().length;
-    const completedTasks = Object.values(checkedTasks).filter(Boolean).length;
-    return (completedTasks / totalTasks) * 100; 
+  const taskKeys = ['All', ...Object.keys(taskData)];
+  const activePerson = taskKeys[activeViewIndex];
+
+  const calculateCompletionPercentage = (person) => {
+    let tasks;
+    if (person === 'All') {
+        tasks = Object.values(taskData).flat();
+    } else {
+        tasks = taskData[person];
+    }
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(task => checkedTasks[task]).length;
+    return totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
   };
 
-  const completionPercentage = calculateCompletionPercentage();
+  const completionPercentage = calculateCompletionPercentage(activePerson);
 
+  const individualCompletionPercentages = Object.keys(taskData).reduce((acc, person) => {
+    acc[person] = calculateCompletionPercentage(person);
+    return acc;
+  }, {});
+
+  
   return (
     // Task lists
     <View style={styles.container}>
-        <Text style={styles.completionText}>
-        {`${completionPercentage.toFixed(0)}%`}
-        </Text>
+      <CompletionPercentage percentage={completionPercentage} name={activePerson} />
       <View style={styles.plantContainer}>
-        <Plant completionPercentage={completionPercentage} />
+      {activeViewIndex === 0 ? <AllTasksImage percentages={individualCompletionPercentages}/> : <Plant completionPercentage={completionPercentage} />}
       </View>
       <View style={styles.galleryContainer}>
         <View style={styles.gallery}>
-          <GalleryPanel data={taskData} checkedTasks={checkedTasks} toggleTask={toggleTask}/>
+          <GalleryPanel data={taskData} 
+          checkedTasks={checkedTasks} 
+          toggleTask={toggleTask}
+          onIndexChanged={(index) => setActiveViewIndex(index)}
+          activeIndex={activeViewIndex}
+          />
         </View>
       </View>
     </View>

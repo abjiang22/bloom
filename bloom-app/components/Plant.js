@@ -1,24 +1,82 @@
 import React from 'react';
-import { View, Image } from 'react-native';
-import PlantStage1 from '../assets/plant-progress1.png';
-import PlantStageFinal from '../assets/plant-final.png';
+import { View, Image,StyleSheet} from 'react-native';
+import Plant1 from '../assets/sprout-1.png';
+import Plant2 from '../assets/sprout-2.png';
+import Plant3 from '../assets/sprout-3.png';
+import Plant4 from '../assets/flower-4.png';
+import Plant5 from '../assets/flower-5.png';
+import Plant6 from '../assets/flower-6.png';
+import Plant7 from '../assets/flower-7.png';
+import Plant8 from '../assets/flower-8.png';
+import PlantScene from '../assets/plant-scene.png';
 
 
 function Plant({ completionPercentage }) {
-    const getPlantStage = (percentage) => {
-      if (percentage < 100) {
-        return <Image source={PlantStage1} style={{ width: 370, height: 320 }} />; // Use img tag for SVG
-      } else if (percentage == 100) {
-        return <Image source={PlantStageFinal} style={{ width: 370, height: 400 }}/>; // Use img tag for PNG
-      }
+    const getPlant = (percentage) => {
+        if(percentage <= 15) {
+            return <Image source={Plant1} style={styles.plant1} />;
+        } else if (percentage > 15 && percentage <= 30) {
+            return <Image source={Plant2} style={styles.plant1} />;
+        } else if (percentage > 30 && percentage <= 45) {
+            return <Image source={Plant3} style={styles.plant1} />;
+        } else if (percentage > 45 && percentage <= 60) {
+            return <Image source={Plant4} style={styles.plant4} />;
+        } else if (percentage > 60 && percentage <= 75) {
+            return <Image source={Plant5} style={styles.plant1} />;
+        } else if (percentage > 75 && percentage <= 90) {
+            return <Image source={Plant6} style={styles.plant1} />;
+        } else if (percentage > 90 && percentage <= 99) {
+            return <Image source={Plant7} style={styles.plant1} />;
+        } else {
+            return <Image source={Plant8} style={styles.plant8} />;
+        }
     };
   
     return (
-      <View className="plant-container">
-        {getPlantStage(completionPercentage)}
+      <View className="plantContainer">
+        <Image source={PlantScene} style={styles.scence}/>
+        {getPlant(completionPercentage)}
         {/* Additional elements or components */}
       </View>
     );
   }
+
+  const styles = StyleSheet.create({
+
+    plantContainer: {
+        position: 'relative',
+        width: 370,
+        height: 320, 
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+   scene: {
+        width: '100%', // Use 100% to fill the container
+        height: '100%', // Use 100% to fill the container
+        position: 'absolute',
+   },
+
+   plant1: {
+        width: 100,
+        height: 200,
+        position: 'absolute',
+        left: 128,
+   },
+   plant4: {
+        width: 105,
+        height: 200,
+        position: 'absolute',
+        left: 127,
+    },
+
+    plant8: {
+        width: 115,
+        height: 200,
+        position: 'absolute',
+        left: 120,
+    }
+
+  });
   
   export default Plant;

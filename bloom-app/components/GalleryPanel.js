@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { MaterialIcons } from '@expo/vector-icons';
-import TaskList from './TaskList'
+import TaskList from './TaskList';
 
-const GalleryPanel = ({ data, checkedTasks, toggleTask }) => {
+
+const GalleryPanel = ({ data, checkedTasks, toggleTask, onIndexChanged, activeIndex }) => {
+
     const allTasks = Object.values(data).flat();
     
     const combinedData = [['All', allTasks], ...Object.entries(data)];
+
     
     return (
         <Swiper style={styles.wrapper}
             showsButtons={true}
+            index={activeIndex}
+            loop={false}
+            onIndexChanged={onIndexChanged}
             nextButton={<MaterialIcons name="navigate-next" size={40} color="#2D6A6E" />}
             prevButton={<MaterialIcons name="navigate-before" size={40} color="#2D6A6E" />}
             buttonWrapperStyle={styles.buttonWrapper}
+            
         >
-        {combinedData.map(([name, tasks], index) => (
-            <View key={index} style={styles.slide}>
-            <Text style={styles.text}>{name} Tasks</Text>
-            <TaskList tasks={tasks} checkedTasks={checkedTasks} toggleTask={toggleTask}/>
-            </View>
-        ))}
+          {combinedData.map(([name, tasks], index) => {
+            return (
+                <View key={index} style={styles.slide}>
+                    <Text style={styles.text}>{name} Tasks</Text>
+                    <TaskList tasks={tasks} checkedTasks={checkedTasks} toggleTask={toggleTask}/>
+                </View>
+            );
+        })}
         </Swiper>
     );
 };
