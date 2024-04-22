@@ -52,8 +52,8 @@ function Plant({ completionPercentage }) {
     },
 
    scene: {
-        width: '100%', // Use 100% to fill the container
-        height: '100%', // Use 100% to fill the container
+        width: '100%',
+        height: '100%',
         position: 'absolute',
    },
 

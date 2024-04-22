@@ -15,8 +15,6 @@ const taskData = {
   'Wendy': ['Task 9', 'Task 10'],
 };
 
-
-
 function HomeScreen() {
   // Keep track of task states
   const [checkedTasks, setCheckedTasks] = useState({});

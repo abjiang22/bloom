@@ -9,7 +9,7 @@ import Plant6 from '../assets/flower-6.png';
 import Plant7 from '../assets/flower-7.png';
 import Plant8 from '../assets/flower-8.png';
 
-const allTasksImagePath = '../assets/all-tasks-background.png'; // Path to your image
+const allTasksImagePath = '../assets/all-tasks-background.png';
 
 const AllTasksImage = ({ percentages }) => {
     const selectFlower = (percentage) => {
@@ -46,13 +46,12 @@ const AllTasksImage = ({ percentages }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // Container styles
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    width: 400, // Adjust based on your design
-    height: 400, // Adjust based on your design
+    width: 400,
+    height: 400,
   },
 
   text: {
