@@ -76,7 +76,8 @@ const GalleryPanel = ({ data, checkedTasks, toggleTask, onIndexChanged, activeIn
                 arrowIconStyle={{ 
                   width: 20, 
                   height: 20, 
-                  marginRight: 20,
+
+                  left: -30
                 }}
                 dropDownStyle={{
                   backgroundColor: '#fafafa', // Background color of the dropdown list
@@ -117,6 +118,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center', 
+    textAlign: 'center',
   },
   buttonWrapper: {
     alignItems: 'flex-start',

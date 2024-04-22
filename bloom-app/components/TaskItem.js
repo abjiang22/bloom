@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2D6A6E',
     borderRadius: 8,
-    padding: 10,
+    padding: 15,
     backgroundColor: '#FFFFFF',
   },
   checkedTaskItem: {
