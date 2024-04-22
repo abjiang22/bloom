@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Image,StyleSheet} from 'react-native';
-import Plant1 from '../assets/sprout-1.png';
-import Plant2 from '../assets/sprout-2.png';
-import Plant3 from '../assets/sprout-3.png';
-import Plant4 from '../assets/flower-4.png';
-import Plant5 from '../assets/flower-5.png';
-import Plant6 from '../assets/flower-6.png';
-import Plant7 from '../assets/flower-7.png';
-import Plant8 from '../assets/flower-8.png';
-import PlantScene from '../assets/plant-scene.png';
+import Plant1 from '../assets/sprout-1.svg';
+import Plant2 from '../assets/sprout-2.svg';
+import Plant3 from '../assets/sprout-3.svg';
+import Plant4 from '../assets/flower-4.svg';
+import Plant5 from '../assets/flower-5.svg';
+import Plant6 from '../assets/flower-6.svg';
+import Plant7 from '../assets/flower-7.svg';
+import Plant8 from '../assets/flower-8.svg';
+import PlantScene from '../assets/plant-scene.svg';
 
 
 function Plant({ completionPercentage }) {
