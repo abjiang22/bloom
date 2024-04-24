@@ -5,8 +5,12 @@ import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
 import Plant from '../assets/schedule_plant.png'
 import AddButton from '../components/AddButton';
+import AddTaskPopUp from '../components/AddTaskPopUp';
+import React, { useState } from 'react';
 
 function ScheduleScreen({navigation}) {
+  
+  const [modalVisible, setModalVisible] = useState(false);
 
   const HorizontalLine = ({ style }) => (
     <View style={[ss.line, style]} />
@@ -20,7 +24,11 @@ function ScheduleScreen({navigation}) {
       
       </View>
       <HorizontalLine/>
-      <AddButton></AddButton>
+      <AddButton onPress={() => setModalVisible(true)} /> 
+      <AddTaskPopUp 
+        isVisible={modalVisible} 
+        onCancel={() => setModalVisible(false)}  // And this line
+      />
     
     </View>
     
