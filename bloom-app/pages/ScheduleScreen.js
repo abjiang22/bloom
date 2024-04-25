@@ -59,5 +59,4 @@ const ss = StyleSheet.create({
   }
 });
 
-
 export default ScheduleScreen;
