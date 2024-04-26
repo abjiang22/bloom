@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { DayPicker } from 'react-native-picker-weekday'
-import AddButton from '../components/AddButton';
 import {styles} from '../pages/AppStyles';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -12,7 +11,6 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
   const [rotation, setRotation] = useState([]);
 
   const handleSave = () => {
-
     onSave(taskName, description, weekdays,  rotation);
   };
 
@@ -37,6 +35,7 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
         onRequestClose={onCancel}
       >
       </Modal>
+      
       <GestureHandlerRootView style={{ flex: 1 }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
@@ -67,7 +66,6 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
                   wrapperStyles ={{/*All Styles applicable to View component*/}}  // (optional for high styling flexiblity)  
               />
               
-
               <Text style={styles.modalTitle}>Rotation</Text>
               {people.map((name) => (
                   <TouchableOpacity

@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-const TaskItem = ({ task, isChecked, toggleTask }) => {
+const TaskItem = ({ task, toggleTask }) => {
     return (
-        <View style={[styles.taskItem, isChecked ? styles.checkedTaskItem : {}]}>
+        <View style={[styles.taskItem, task.checked ? styles.checkedTaskItem : {}]}>
             <TouchableOpacity
-            style={[styles.checkbox, isChecked ? styles.checkedCheckbox : {}]}
-            onPress={toggleTask}
+              style={[styles.checkbox, task.checked ? styles.checkedCheckbox : {}]}
+              onPress={() => toggleTask(task)}
             >
-            {isChecked && <View style={styles.innerCircle} />}
+            {task.checked && <View style={styles.innerCircle} />}
             </TouchableOpacity>
-            <Text style={[styles.taskText, isChecked ? styles.checkedTaskText : {}]}>{task}</Text>
+            <Text style={[styles.taskText, task.checked ? styles.checkedTaskText : {}]}>{task.taskName}</Text>
         </View>
     );
 };
