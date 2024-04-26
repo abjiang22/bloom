@@ -92,14 +92,17 @@ const styles = StyleSheet.create({
   },
   dropDownPicker: {
     borderWidth: 0,
-    width: '40%',
+    width: '60%', 
     alignSelf: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   arrowIconStyle: {
     width: 25,
     height: 25,
-    alignItems: 'center'}
+    position: 'relative'
+  }
 });
 
 export default GalleryPanel;
