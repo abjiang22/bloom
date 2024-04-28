@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DayPicker from './DayPicker';
-// import { DayPicker } from 'react-native-picker-weekday'
-import {styles} from '../pages/AppStyles';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
+// import DraggableFlatList from 'react-native-draggable-flatlist';
 
 function AddTaskPopUp({ isVisible, onSave, onCancel }) {
   const [taskName, setTaskName] = useState('');
@@ -44,14 +43,13 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
           <View style={style.modalView}>
             <ScrollView>
               {/* <HorizontalLine></HorizontalLine> */}
-              <Text style={style.modalTitle}>Task Name</Text>
+              <Text style={style.modalTitle}>New Task</Text>
               <TextInput
                 style={style.input}
                 onChangeText={setTaskName}
                 value={taskName}
                 placeholder="Task Name"
               />
-              <Text style={style.modalTitle}>Description</Text>
               <TextInput
                 style={style.input}
                 onChangeText={setDescription}
@@ -120,21 +118,22 @@ const style = StyleSheet.create({
   // },
   modalView: {
     backgroundColor: 'white',
+    marginTop: -100,
     padding: 20,
     alignItems: 'stretch', // Ensures children width stretch to fill the modal
     width: '100%', // Modal width
     maxHeight: '100%', // Modal maximum height
   },
   modalTitle: {
-    marginBottom: 40,
-    textAlign: 'left',
+    marginBottom: 20,
+    textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
     color: '#2D6A6E', // Title color
   },
   input: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#2D6A6E', // Border color
+    borderWidth: 1.2,
+    borderColor: '#2D6A6E', // Border color
     padding: 10,
     marginBottom: 20,
     fontSize: 16,
