@@ -11,6 +11,13 @@ import React, { useState } from 'react';
 function ScheduleScreen({navigation}) {
   
   const [modalVisible, setModalVisible] = useState(false);
+  const [tasks, setTasks] = useState([]);
+
+  const handleSaveTask = (newTask) => {
+    setTasks((currentTasks) => [...currentTasks, newTask]);
+    setModalVisible(false);
+  };
+
 
   const HorizontalLine = ({ style }) => (
     <View style={[ss.line, style]} />
@@ -27,9 +34,12 @@ function ScheduleScreen({navigation}) {
       <AddButton onPress={() => setModalVisible(true)} /> 
       <AddTaskPopUp 
         isVisible={modalVisible} 
-        onCancel={() => setModalVisible(false)}  // And this line
+        onSave={handleSaveTask}
+        onCancel={() => setModalVisible(false)}
       />
-    
+      {tasks.map((task, index) => (
+        <ScheduleTaskItem key={index} {...task} />
+      ))}
     </View>
     
   );

@@ -27,6 +27,9 @@ const GalleryPanel = ({ names, tasks, toggleTask, onIndexChanged, activeIndex })
           setValue(selectedValue);
       }
   };
+
+  const filteredTasks = value === 'All' ? tasks : tasks.filter(task => task.assignees.some(user => user.name === value));
+
     
   return (
     <Swiper

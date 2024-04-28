@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { DayPicker } from 'react-native-picker-weekday'
+import DayPicker from './DayPicker';
+// import { DayPicker } from 'react-native-picker-weekday'
 import {styles} from '../pages/AppStyles';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function AddTaskPopUp({ isVisible, onSave, onCancel }) {
-  const [modalVisible, setModalVisible] = useState(false);
   const [taskName, setTaskName] = useState('');
+  const [description, setDescription] = useState('');
   const [weekdays, setWeekdays] = useState([-1]);
   const [rotation, setRotation] = useState([]);
 
   const handleSave = () => {
-    onSave(taskName, description, weekdays,  rotation);
+    onSave( {taskName, description, weekdays,  rotation} );
   };
 
   const people = ['Jessica', 'Cassie', 'Stephanie', 'Wendy'];
+
+  // const HorizontalLine = ({ ss }) => (
+  //   <View style={[style.line, ss]} />
+  // );
+
 
   const toggleRotation = (name) => {
     setRotation((currentRotation) => {
@@ -27,71 +33,159 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
   };
 
   return (
-    <View style={{ flex: 1 }}>
       <Modal
         animationType="slide"
         transparent={true}
         visible={isVisible}
         onRequestClose={onCancel}
       >
-      </Modal>
-      
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+        <View style={style.centeredView}>
+          <View style={style.modalView}>
             <ScrollView>
-              <Text style={styles.modalTitle}>Task Name</Text>
+              {/* <HorizontalLine></HorizontalLine> */}
+              <Text style={style.modalTitle}>Task Name</Text>
               <TextInput
-                style={styles.input}
+                style={style.input}
                 onChangeText={setTaskName}
                 value={taskName}
                 placeholder="Task Name"
               />
-              <Text style={styles.modalTitle}></Text>
+              <Text style={style.modalTitle}>Description</Text>
               <TextInput
-                style={styles.input}
-                onChangeText={setTaskName}
-                value={taskName}
-                placeholder="Task Name"
+                style={style.input}
+                onChangeText={setDescription}
+                value={description}
+                placeholder="Description"
               />
               {/* Other input fields for frequency, days, etc. */}
               <DayPicker
                   weekdays={weekdays}
                   setWeekdays={setWeekdays}
-                  activeColor='violet'
-                  textColor='white'
-                  inactiveColor='grey'
-                  dayTextStyle = {{/*All styles applicable to text component*/}}  //(optional for high styling flexiblity)
-                  itemStyles ={{/*All Styles applicable to View component*/}}     //(optional for high styling flexiblity)
-                  wrapperStyles ={{/*All Styles applicable to View component*/}}  // (optional for high styling flexiblity)  
+                  activeColor='#2D6A6E'
+                  inactiveTextColor='#2D6A6E'
+                  activeTextColor='white'
+                  inactiveColor='white'
+                  borderColor='#2D6A6E'
+                  dayTextStyle = {{}}
+                  itemStyles ={{}}
+                  wrapperStyles ={{}} 
               />
               
-              <Text style={styles.modalTitle}>Rotation</Text>
+              <Text style={style.modalTitle}>Rotation</Text>
               {people.map((name) => (
                   <TouchableOpacity
                       key={name}
-                      style={styles.rotationItem}
+                      style={style.rotationItem}
                       onPress={() => toggleRotation(name)}
                   >     
                   <Text>{name}</Text>
-                  <View style={rotation.includes(name) ? styles.radioFilled : styles.radioEmpty} />
+                  <View style={rotation.includes(name) ? style.radioFilled : style.radioEmpty} />
                   </TouchableOpacity>
               ))}
 
-              <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
-                  <Text style={styles.buttonText}>Save</Text>
+              <View style={style.buttonContainer}>
+                <TouchableOpacity onPress={handleSave} style={style.saveButton}>
+                  <Text style={style.buttonText}>Save</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={onCancel} style={styles.cancelButton}>
-                  <Text style={styles.buttonText}>Cancel</Text>
+                <TouchableOpacity onPress={onCancel} style={style.cancelButton}>
+                  <Text style={style.buttonText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             </ScrollView>
           </View>
         </View>
       </GestureHandlerRootView>
-    </View>
+      
+      </Modal>
+
   );
 }
 
+
+const style = StyleSheet.create({
+  centeredView: {
+    marginTop: '30%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 30,
+  },
+  // line: {
+  //   height: 3,
+  //   backgroundColor: '#2D6A6E',
+  //   width: '15%',
+  //   alignSelf: 'center',
+  // },
+  modalView: {
+    backgroundColor: 'white',
+    padding: 20,
+    alignItems: 'stretch', // Ensures children width stretch to fill the modal
+    width: '100%', // Modal width
+    maxHeight: '100%', // Modal maximum height
+  },
+  modalTitle: {
+    marginBottom: 40,
+    textAlign: 'left',
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#2D6A6E', // Title color
+  },
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#2D6A6E', // Border color
+    padding: 10,
+    marginBottom: 20,
+    fontSize: 16,
+  },
+  rotationItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#2D6A6E', // Border color for list items
+  },
+  rotationName: {
+    fontSize: 16,
+  },
+  radioFilled: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#2D6A6E', // Color for selected item
+  },
+  radioEmpty: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#2D6A6E', // Border color
+    backgroundColor: 'transparent',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    marginTop: 20,
+  },
+  saveButton: {
+    backgroundColor: '#2D6A6E', // Save button background color
+    borderRadius: 20,
+    padding: 10,
+  },
+  cancelButton: {
+    backgroundColor: '#aaa', // Cancel button background color
+    borderRadius: 20,
+    padding: 10,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+
+
+})
 export default AddTaskPopUp;
