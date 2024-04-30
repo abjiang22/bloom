@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.bloom-app"
     },
     "android": {
       "adaptiveIcon": {
@@ -24,7 +25,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/logo.svg"
+      "favicon": "./assets/logo.png"
     }
   }
 }

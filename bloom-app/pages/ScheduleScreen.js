@@ -3,7 +3,8 @@ import {View, Image, Text, StyleSheet} from 'react-native';
 import {styles} from './AppStyles';
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
-import Plant from '../assets/schedule_plant.png'
+import Plant from '../assets/schedule-plant.png'
+// import Plant from '../assets/schedule-plant.svg'
 import AddButton from '../components/AddButton';
 import AddTaskPopUp from '../components/AddTaskPopUp';
 import React, { useState } from 'react';
@@ -56,6 +57,9 @@ const ss = StyleSheet.create({
   }, 
   img: {
     marginLeft: 30,
+    // png size
+    maxWidth: 107,
+    maxHeight: 80
   },
   line: {
     height: 3,

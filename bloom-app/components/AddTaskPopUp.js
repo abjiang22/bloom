@@ -57,6 +57,7 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
                 placeholder="Description"
               />
               {/* Other input fields for frequency, days, etc. */}
+              <Text style={style.modalTitle}>Repeat every...</Text>
               <DayPicker
                   weekdays={weekdays}
                   setWeekdays={setWeekdays}
@@ -118,14 +119,15 @@ const style = StyleSheet.create({
   // },
   modalView: {
     backgroundColor: 'white',
-    marginTop: -100,
+    marginTop: -180,
     padding: 20,
     alignItems: 'stretch', // Ensures children width stretch to fill the modal
     width: '100%', // Modal width
     maxHeight: '100%', // Modal maximum height
   },
   modalTitle: {
-    marginBottom: 20,
+    marginBottom: 10,
+    marginTop: 25,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
@@ -133,6 +135,7 @@ const style = StyleSheet.create({
   },
   input: {
     borderWidth: 1.2,
+    borderRadius: 8,
     borderColor: '#2D6A6E', // Border color
     padding: 10,
     marginBottom: 20,

@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 30,
+    marginBottom: 20,
   },
   text: {
     fontFamily: 'RoundedMplus1c-ExtraBold'
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 15,
   },
 });
 
