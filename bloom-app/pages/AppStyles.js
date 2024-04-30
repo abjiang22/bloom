@@ -12,8 +12,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         width: '100%',
-    },
-    
+    },   
     plantContainer: {
         justifyContent: 'flex-start',
         alignItems: 'center', 
@@ -21,7 +20,6 @@ export const styles = StyleSheet.create({
         paddingBottom: 0,
         width: '100%',
     },
-
     galleryContainer: {
         flex: 1,
         justifyContent: 'flex-end',

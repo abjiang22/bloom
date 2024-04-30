@@ -11,7 +11,7 @@ const GalleryPanel = ({ names, tasks, toggleTask, onIndexChanged, activeIndex })
 
   // Create items for DropDownPicker based on names
   const items = names.map((name, index) => ({
-      label: name !== 'All' ? name + "'s Tasks" : "All Tasks",
+      label: name !== 'All' ? (name !== "Me" ? name + "'s Tasks" : "My Tasks") : "All Tasks",
       value: name,
       index
   }));
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   dropDownPicker: {
     borderWidth: 0,
-    width: '60%', 
+    width: '55%', 
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',

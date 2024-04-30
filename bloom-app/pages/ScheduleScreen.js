@@ -60,7 +60,7 @@ const ss = StyleSheet.create({
     marginLeft: 30,
   },
   line: {
-    height: 3,
+    height: 1.2,
     backgroundColor: '#2D6A6E',
     width: '100%'
   },

@@ -28,11 +28,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   text: {
+    textAlign: 'center',
     color: '#2D6A6E',
     fontSize: 18,
     fontFamily: 'RoundedMplus1c-ExtraBold'
   },
   completionText: {
+    textAlign: 'center',
     fontSize: 30,
     marginLeft: 10,
     fontWeight: 'bold',
