@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import DayPicker from './DayPicker';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
-// import DraggableFlatList from 'react-native-draggable-flatlist';
+import { useAppContext } from '../AppContext';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { Task } from '../classes/Task';
 
 function AddTaskPopUp({ isVisible, onSave, onCancel }) {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
   const [weekdays, setWeekdays] = useState([-1]);
   const [rotation, setRotation] = useState([]);
+  const [dueDate, setDueDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const { users, setUsers, tasks, setTasks } = useAppContext();
 
   const handleSave = () => {
-    onSave( {taskName, description, weekdays,  rotation} );
+    const newTask = new Task(taskName, rotation, dueDate);
+    onSave(newTask);
+    setTaskName('');
+    setDescription('');
+    setWeekdays([-1]);
+    setRotation([]);
+    setDueDate(new Date());
+  };
+
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || dueDate;
+    setShowDatePicker(Platform.OS === 'android');
+    setDueDate(currentDate);
   };
 
   const people = ['Jessica', 'Cassie', 'Stephanie', 'Wendy'];
@@ -20,87 +37,74 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
   //   <View style={[style.line, ss]} />
   // );
 
-
-  const toggleRotation = (name) => {
+  const toggleRotation = (userToToggle) => {
     setRotation((currentRotation) => {
-      if (currentRotation.includes(name)) {
-        return currentRotation.filter((person) => person !== name);
+      const index = currentRotation.findIndex(user => user.name === userToToggle.name);
+      if (index !== -1) {
+          return currentRotation.filter((userToToggle, idx) => idx !== index);
       } else {
-        return [...currentRotation, name];
+          return [...currentRotation, userToToggle];
       }
     });
   };
 
   return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isVisible}
-        onRequestClose={onCancel}
-      >
-        <GestureHandlerRootView style={{ flex: 1 }}>
-        <View style={style.centeredView}>
-          <View style={style.modalView}>
-            <ScrollView>
-              {/* <HorizontalLine></HorizontalLine> */}
-              <Text style={style.modalTitle}>New Task</Text>
-              <TextInput
-                style={style.input}
-                onChangeText={setTaskName}
-                value={taskName}
-                placeholder="Task Name"
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={isVisible}
+      onRequestClose={onCancel}
+    >
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={style.centeredView}>
+        <View style={style.modalView}>
+          <ScrollView>
+            <Text style={style.modalTitle}>New Task</Text>
+            <TextInput
+              style={style.input}
+              onChangeText={setTaskName}
+              value={taskName}
+              placeholder="Task Name"
+            />
+            <Text style={style.modalTitle}>Due Date</Text>
+            <TouchableOpacity style={style.input} onPress={() => setShowDatePicker(true)}>
+              <Text>{dueDate.toDateString()}</Text>
+            </TouchableOpacity>
+            {showDatePicker && (
+              <DateTimePicker
+                value={dueDate}
+                mode="date"
+                display="default"
+                onChange={handleDateChange}
               />
-              <TextInput
-                style={style.input}
-                onChangeText={setDescription}
-                value={description}
-                placeholder="Description"
-              />
-              {/* Other input fields for frequency, days, etc. */}
-              <Text style={style.modalTitle}>Repeat every...</Text>
-              <DayPicker
-                  weekdays={weekdays}
-                  setWeekdays={setWeekdays}
-                  activeColor='#2D6A6E'
-                  inactiveTextColor='#2D6A6E'
-                  activeTextColor='white'
-                  inactiveColor='white'
-                  borderColor='#2D6A6E'
-                  dayTextStyle = {{}}
-                  itemStyles ={{}}
-                  wrapperStyles ={{}} 
-              />
-              
-              <Text style={style.modalTitle}>Rotation</Text>
-              {people.map((name) => (
-                  <TouchableOpacity
-                      key={name}
-                      style={style.rotationItem}
-                      onPress={() => toggleRotation(name)}
-                  >     
-                  <Text>{name}</Text>
-                  <View style={rotation.includes(name) ? style.radioFilled : style.radioEmpty} />
-                  </TouchableOpacity>
-              ))}
+            )}
+            <Text style={style.modalTitle}>Assign to</Text>
+            {users.map((user) => (
+                <TouchableOpacity
+                    key={user.name}
+                    style={style.rotationItem}
+                    onPress={() => toggleRotation(user)}
+                >
+                <Text>{user.name}</Text>
+                <View style={rotation.includes(user) ? style.radioFilled : style.radioEmpty} />
+                </TouchableOpacity>
+            ))}
 
-              <View style={style.buttonContainer}>
-                <TouchableOpacity onPress={handleSave} style={style.saveButton}>
-                  <Text style={style.buttonText}>Save</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onCancel} style={style.cancelButton}>
-                  <Text style={style.buttonText}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
-            </ScrollView>
-          </View>
+            <View style={style.buttonContainer}>
+              <TouchableOpacity onPress={handleSave} style={style.saveButton}>
+                <Text style={style.buttonText}>Save</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={onCancel} style={style.cancelButton}>
+                <Text style={style.buttonText}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
         </View>
-      </GestureHandlerRootView>
-      
-      </Modal>
-
-  );
+      </View>
+    </GestureHandlerRootView>
+  </Modal>
+);
 }
-
 
 const style = StyleSheet.create({
   centeredView: {
@@ -111,15 +115,9 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 30,
   },
-  // line: {
-  //   height: 3,
-  //   backgroundColor: '#2D6A6E',
-  //   width: '15%',
-  //   alignSelf: 'center',
-  // },
   modalView: {
     backgroundColor: 'white',
-    marginTop: -180,
+    marginTop: -275,
     padding: 20,
     alignItems: 'stretch', // Ensures children width stretch to fill the modal
     width: '100%', // Modal width

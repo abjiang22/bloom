@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import AppLoading from 'expo-app-loading';
+import { AppProvider } from './AppContext';
 import * as Font from 'expo-font'; 
 
 // Navigation Stack
@@ -32,13 +33,15 @@ function App() {
     );
   }
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Landing">
-        <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
-        <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
-        <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Landing">
+          <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
+          <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
+          <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 }
 

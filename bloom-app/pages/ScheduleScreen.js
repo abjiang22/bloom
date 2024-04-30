@@ -1,13 +1,16 @@
+import React, { useState } from 'react';
 import {StatusBar} from 'expo-status-bar';
 import {View, Image, Text, StyleSheet} from 'react-native';
+
 import {styles} from './AppStyles';
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
-import Plant from '../assets/schedule-plant.png'
-// import Plant from '../assets/schedule-plant.svg'
 import AddButton from '../components/AddButton';
-import AddTaskPopUp from '../components/AddTaskPopUp';
-import React, { useState } from 'react';
+import AddScheduleTaskPopUp from '../components/AddScheduleTaskPopUp';
+import ScheduleTaskItem from '../components/ScheduleTaskItem';
+import { useAppContext } from '../AppContext';
+
+import Plant from '../assets/schedule-plant.png'
 
 function ScheduleScreen({navigation}) {
   
@@ -33,7 +36,7 @@ function ScheduleScreen({navigation}) {
       </View>
       <HorizontalLine/>
       <AddButton onPress={() => setModalVisible(true)} /> 
-      <AddTaskPopUp 
+      <AddScheduleTaskPopUp 
         isVisible={modalVisible} 
         onSave={handleSaveTask}
         onCancel={() => setModalVisible(false)}
