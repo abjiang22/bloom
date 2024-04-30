@@ -1,11 +1,12 @@
 import {StatusBar} from 'expo-status-bar';
 import {View, Image} from 'react-native';
-import {styles} from './AppStyles';
+
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
 import LoginPage from '../pages/LoginPage.js';
 import MainPage from './MainPage.js';
 
+import {styles} from './AppStyles';
 
 function LandingPage({navigation}) {
   return (

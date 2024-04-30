@@ -1,37 +1,24 @@
-import { View, Text } from 'react-native';
-import {styles} from './AppStyles';
-import GalleryPanel from '../components/GalleryPanel';
 import React, { useState, useMemo } from 'react';
+import { View, Text } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+
+import { useAppContext } from '../AppContext';
+import GalleryPanel from '../components/GalleryPanel';
 import Plant from '../components/Plant';
 import CompletionPercentage from '../components/CompletionPercent';
 import AllTasksImage from '../components/AllTasks';
-import { Picker } from '@react-native-picker/picker';
-import {Task} from "../classes/Task";
-import {User} from "../classes/User";
+import AddButton from '../components/AddButton';
+import {Task} from '../classes/Task'
+
+import AddTaskPopUp from '../components/AddTaskPopUp';
+
+import {styles} from './AppStyles';
 
 function HomeScreen() {
-  // Keep track of task states
+  const { users, setUsers, tasks, setTasks } = useAppContext();
   const [activeViewIndex, setActiveViewIndex] = useState(0);
-  
-  const [users, setUsers] = useState ([
-    new User("My"),
-    new User("Cassie"),
-    new User("Stephanie"),
-    new User("Wendy")
-  ]);
-  
-  const [tasks, setTasks] = useState([
-    new Task("Task 3", [users[0]]),
-    new Task("Task 4", [users[0]]),
-    new Task("Task 5", [users[1]]),
-    new Task("Task 6", [users[1]]),
-    new Task("Task 7", [users[2]]),
-    new Task("Task 8", [users[2]]),
-    new Task("Task 9", [users[3]]),
-    new Task("Task 10", [users[3]]),
-    new Task("Task 11", [users[3]]),
-    new Task("Task 12", [users[3]]),
-  ]);
+  const [modalVisible, setModalVisible] = useState(false);
+
 
   const toggleTask = (taskToToggle) => {
     setTasks(prevTasks => prevTasks.map(task => {
@@ -44,9 +31,9 @@ function HomeScreen() {
   };
   
   const names = useMemo(() => {
-    const allNames = new Set(tasks.flatMap(task => task.assignees.map(assignee => assignee.name)));
+    const allNames = users.map(user => user.name);
     return ['All', ...allNames];
-  }, [tasks]);
+  }, [users]);
 
   const activePerson = names[activeViewIndex];
 
@@ -79,6 +66,11 @@ function HomeScreen() {
 
     return completionPercentages;
   }, [tasks]);
+
+  const handleSaveTask = (newTask) => {
+    setTasks(currentTasks => [...currentTasks, newTask]);
+    setModalVisible(false);
+  };
   
   return (
     <View style={styles.container}>
@@ -86,7 +78,6 @@ function HomeScreen() {
       {activeViewIndex === 0 ? <AllTasksImage percentages={individualCompletionPercentages}/> : <Plant completionPercentage={completionPercentage} />}
       </View>
       <CompletionPercentage percentage={completionPercentage} name={activePerson} />
-      <AddButton/> 
       <View style={styles.galleryContainer}>
         <View style={styles.gallery}>
           <GalleryPanel 
@@ -96,6 +87,12 @@ function HomeScreen() {
             onIndexChanged={(index) => setActiveViewIndex(index)}
             activeIndex={activeViewIndex}
           />
+          <AddTaskPopUp
+            isVisible={modalVisible} 
+            onSave={handleSaveTask}
+            onCancel={() => setModalVisible(false)}
+          />
+          <AddButton onPress={() => setModalVisible(true)}/> 
         </View>
       </View>
     </View>

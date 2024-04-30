@@ -1,8 +1,10 @@
 import {StatusBar} from 'expo-status-bar';
 import {View, Image, Text} from 'react-native';
-import {styles} from './AppStyles';
+
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
+
+import {styles} from './AppStyles';
 
 function ProfileScreen({navigation}) {
   return (

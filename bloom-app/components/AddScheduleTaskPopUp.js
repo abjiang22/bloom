@@ -1,43 +1,37 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DayPicker from './DayPicker';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAppContext } from '../AppContext';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { Task } from '../classes/Task';
 
-function AddTaskPopUp({isVisible, onSave, onCancel }) {
+// import DraggableFlatList from 'react-native-draggable-flatlist';
+
+function AddScheduleTaskPopUp({ isVisible, onSave, onCancel }) {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
   const [weekdays, setWeekdays] = useState([-1]);
   const [rotation, setRotation] = useState([]);
-  const [dueDate, setDueDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
   const { users, setUsers, tasks, setTasks } = useAppContext();
 
   const handleSave = () => {
-    const newTask = new Task(taskName, rotation, dueDate);
-    onSave(newTask);
-    setTaskName('');
-    setDescription('');
-    setWeekdays([-1]);
-    setRotation([]);
-    setDueDate(new Date());
+    onSave( {taskName, description, weekdays, rotation} );
   };
 
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || dueDate;
-    setShowDatePicker(Platform.OS === 'android');
-    setDueDate(currentDate);
-  };
+  const people = users.map(user => user.name);
 
-  const toggleRotation = (userToToggle) => {
+  // const HorizontalLine = ({ ss }) => (
+  //   <View style={[style.line, ss]} />
+  // );
+
+  const toggleRotation = (name) => {
     setRotation((currentRotation) => {
-      const index = currentRotation.findIndex(user => user.name === userToToggle.name);
-      if (index !== -1) {
-          return currentRotation.filter((userToToggle, idx) => idx !== index);
+      const user = users.find(user => user.name === name);
+      const isUserInRotation = currentRotation.some(u => u.name === user.name);
+  
+      if (isUserInRotation) {
+        return currentRotation.filter(u => u.name !== user.name);
       } else {
-          return [...currentRotation, userToToggle];
+        return [...currentRotation, user];
       }
     });
   };
@@ -60,30 +54,31 @@ function AddTaskPopUp({isVisible, onSave, onCancel }) {
                 value={taskName}
                 placeholder="Task Name"
               />
-              <Text style={style.modalTitle}>Due Date</Text>
-              <TouchableOpacity
-                style={style.input}
-                onPress={() => setShowDatePicker(true)}
-              >
-                <Text>{dueDate.toDateString()}</Text>
-              </TouchableOpacity>
-              {showDatePicker && (
-                <DateTimePicker
-                  value={dueDate}
-                  mode="date"
-                  display="default"
-                  onChange={handleDateChange}
-                />
-              )}
+            <Text style={style.modalTitle}>Weekly Schedule</Text>
+              <DayPicker
+                  weekdays={weekdays}
+                  setWeekdays={setWeekdays}
+                  activeColor='#2D6A6E'
+                  inactiveTextColor='#2D6A6E'
+                  activeTextColor='white'
+                  inactiveColor='white'
+                  borderColor='#2D6A6E'
+                  dayTextStyle = {{}}
+                  itemStyles ={{}}
+                  wrapperStyles ={{
+                    marginTop: -20
+                  }} 
+              />
+              
               <Text style={style.modalTitle}>Assign to</Text>
-              {users.map((user) => (
+              {people.map((name) => (
                   <TouchableOpacity
-                      key={user.name}
+                      key={name}
                       style={style.rotationItem}
-                      onPress={() => toggleRotation(user)}
-                  >
-                  <Text>{user.name}</Text>
-                  <View style={rotation.includes(user) ? style.radioFilled : style.radioEmpty} />
+                      onPress={() => toggleRotation(name)}
+                  >     
+                  <Text>{name}</Text>
+                  <View style={rotation.includes(name) ? style.radioFilled : style.radioEmpty} />
                   </TouchableOpacity>
               ))}
 
@@ -99,9 +94,12 @@ function AddTaskPopUp({isVisible, onSave, onCancel }) {
           </View>
         </View>
       </GestureHandlerRootView>
+      
       </Modal>
+
   );
 }
+
 
 const style = StyleSheet.create({
   centeredView: {
@@ -112,9 +110,15 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 30,
   },
+  // line: {
+  //   height: 3,
+  //   backgroundColor: '#2D6A6E',
+  //   width: '15%',
+  //   alignSelf: 'center',
+  // },
   modalView: {
     backgroundColor: 'white',
-    marginTop: -275,
+    marginTop: -125,
     padding: 20,
     alignItems: 'stretch',
     width: '100%',
@@ -183,4 +187,4 @@ const style = StyleSheet.create({
 
 
 })
-export default AddTaskPopUp;
+export default AddScheduleTaskPopUp;

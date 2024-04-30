@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -57,7 +57,7 @@ export default function MainPage() {
         })}
       >
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Schedule" component={ScheduleScreen} />
+      <Tab.Screen name="Schedule" component={ScheduleScreen}/>
       <Tab.Screen name="Social" component={SocialScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>

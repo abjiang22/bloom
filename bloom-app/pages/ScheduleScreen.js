@@ -1,16 +1,20 @@
+import React, { useState } from 'react';
 import {StatusBar} from 'expo-status-bar';
 import {View, Image, Text, StyleSheet} from 'react-native';
+
 import {styles} from './AppStyles';
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
-import Plant from '../assets/schedule_plant.png'
 import AddButton from '../components/AddButton';
-import AddTaskPopUp from '../components/AddTaskPopUp';
-import React, { useState } from 'react';
+import AddScheduleTaskPopUp from '../components/AddScheduleTaskPopUp';
 import ScheduleTaskItem from '../components/ScheduleTaskItem';
+import { useAppContext } from '../AppContext';
+
+
+import Plant from '../assets/schedule_plant.png'
+
 
 function ScheduleScreen({navigation}) {
-  
   const [modalVisible, setModalVisible] = useState(false);
   const [tasks, setTasks] = useState([]);
 
@@ -18,7 +22,6 @@ function ScheduleScreen({navigation}) {
     setTasks((currentTasks) => [...currentTasks, newTask]);
     setModalVisible(false);
   };
-
 
   const HorizontalLine = ({ style }) => (
     <View style={[ss.line, style]} />
@@ -29,11 +32,10 @@ function ScheduleScreen({navigation}) {
       <View style={ss.titleContainer}>
         <Image source={Plant} style={ss.img}></Image>
         <Text style={ss.title}>Schedule</Text>
-      
       </View>
       <HorizontalLine/>
       <AddButton onPress={() => setModalVisible(true)} /> 
-      <AddTaskPopUp 
+      <AddScheduleTaskPopUp
         isVisible={modalVisible} 
         onSave={handleSaveTask}
         onCancel={() => setModalVisible(false)}
@@ -42,7 +44,6 @@ function ScheduleScreen({navigation}) {
         <ScheduleTaskItem key={index} {...task} />
       ))}
     </View>
-    
   );
 }
 

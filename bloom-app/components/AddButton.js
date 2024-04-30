@@ -1,15 +1,13 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import AddTaskPopUp from  './AddTaskPopUp';
 
 function AddButton({ onPress }) {
     return (
       <TouchableOpacity onPress={onPress} style={styles.addButton}>
         <MaterialIcons name="add" size={30} color="white" />
-
       </TouchableOpacity>
-      
+
     );
   }
   

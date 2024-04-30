@@ -32,6 +32,4 @@ export const styles = StyleSheet.create({
         height: '70%',
         width: '100%',
     },
-
-   
 });
