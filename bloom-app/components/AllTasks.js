@@ -46,13 +46,12 @@ const AllTasksImage = ({ percentages }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // Container styles
     justifyContent: 'center',
     alignItems: 'center',
   },
   image: {
-    width: 400, // Adjust based on your design
-    height: 400, // Adjust based on your design
+    width: 400,
+    height: 400,
   },
 
   text: {

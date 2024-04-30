@@ -4,9 +4,15 @@ import { View, Text, StyleSheet } from 'react-native';
 
 
 const CompletionPercentage = ({ percentage, name }) => {
-  return (
+
+  if (name == 'All') {
+    name = 'Group';
+  } else if (name == 'My') {
+    name = 'Me';
+  }
+  return ( 
     <View style={styles.completionTextContainer}>
-      {/* <Text>{`${name}`}</Text> */}
+      <Text style={styles.text}>{`${name}`}</Text>
       <Text style={styles.completionText}>{`${percentage.toFixed(0)}%`}</Text>
     </View>
   );
@@ -21,8 +27,14 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginLeft: 20,
   },
-  completionText: {
+  text: {
+    color: '#2D6A6E',
     fontSize: 18,
+    fontFamily: 'RoundedMplus1c-ExtraBold'
+  },
+  completionText: {
+    fontSize: 30,
+    marginLeft: 10,
     fontWeight: 'bold',
     color: '#2D6A6E',
     fontFamily: 'RoundedMplus1c-ExtraBold',

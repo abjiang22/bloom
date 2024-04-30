@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {View, Image} from 'react-native';
+import {View, Image, Text} from 'react-native';
 import {styles} from './AppStyles';
 import SimpleButton from '../components/SimpleButton';
 import Logo from '../components/Logo';
@@ -7,7 +7,8 @@ import Logo from '../components/Logo';
 function ProfileScreen({navigation}) {
   return (
     <View style={styles.container}>
-      <Logo />
+      <Text>My Profile</Text>
+
     </View>
   );
 }
