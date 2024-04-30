@@ -7,6 +7,7 @@ import Plant from '../assets/schedule_plant.png'
 import AddButton from '../components/AddButton';
 import AddTaskPopUp from '../components/AddTaskPopUp';
 import React, { useState } from 'react';
+import ScheduleTaskItem from '../components/ScheduleTaskItem';
 
 function ScheduleScreen({navigation}) {
   

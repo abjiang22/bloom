@@ -42,7 +42,6 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
         <View style={style.centeredView}>
           <View style={style.modalView}>
             <ScrollView>
-              {/* <HorizontalLine></HorizontalLine> */}
               <Text style={style.modalTitle}>New Task</Text>
               <TextInput
                 style={style.input}
@@ -50,13 +49,7 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
                 value={taskName}
                 placeholder="Task Name"
               />
-              <TextInput
-                style={style.input}
-                onChangeText={setDescription}
-                value={description}
-                placeholder="Description"
-              />
-              {/* Other input fields for frequency, days, etc. */}
+            <Text style={style.modalTitle}>Weekly Schedule</Text>
               <DayPicker
                   weekdays={weekdays}
                   setWeekdays={setWeekdays}
@@ -67,10 +60,12 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
                   borderColor='#2D6A6E'
                   dayTextStyle = {{}}
                   itemStyles ={{}}
-                  wrapperStyles ={{}} 
+                  wrapperStyles ={{
+                    marginTop: -20
+                  }} 
               />
               
-              <Text style={style.modalTitle}>Rotation</Text>
+              <Text style={style.modalTitle}>Assign to</Text>
               {people.map((name) => (
                   <TouchableOpacity
                       key={name}
@@ -118,22 +113,22 @@ const style = StyleSheet.create({
   // },
   modalView: {
     backgroundColor: 'white',
-    marginTop: -100,
+    marginTop: -125,
     padding: 20,
-    alignItems: 'stretch', // Ensures children width stretch to fill the modal
-    width: '100%', // Modal width
-    maxHeight: '100%', // Modal maximum height
+    alignItems: 'stretch',
+    width: '100%',
+    maxHeight: '100%',
   },
   modalTitle: {
     marginBottom: 20,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
-    color: '#2D6A6E', // Title color
+    color: '#2D6A6E',
   },
   input: {
     borderWidth: 1.2,
-    borderColor: '#2D6A6E', // Border color
+    borderColor: '#2D6A6E',
     padding: 10,
     marginBottom: 20,
     fontSize: 16,
@@ -144,7 +139,7 @@ const style = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#2D6A6E', // Border color for list items
+    borderBottomColor: '#2D6A6E',
   },
   rotationName: {
     fontSize: 16,

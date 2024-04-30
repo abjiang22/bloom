@@ -86,6 +86,7 @@ function HomeScreen() {
       {activeViewIndex === 0 ? <AllTasksImage percentages={individualCompletionPercentages}/> : <Plant completionPercentage={completionPercentage} />}
       </View>
       <CompletionPercentage percentage={completionPercentage} name={activePerson} />
+      <AddButton/> 
       <View style={styles.galleryContainer}>
         <View style={styles.gallery}>
           <GalleryPanel 

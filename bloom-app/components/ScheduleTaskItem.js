@@ -5,7 +5,6 @@ function ScheduleTaskItem({ taskName, description, weekdays,  }) {
     return (
         <View>
             <Text></Text>
-
         </View>
     )
 }

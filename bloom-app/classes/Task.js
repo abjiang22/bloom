@@ -1,9 +1,10 @@
 export class Task {
-    constructor(taskName, assignees = [], dueDate = null, checked = false) {
+    constructor(taskName, assignees = [], dueDate = null, checked = false, rotational = false) {
       this.taskName = taskName;
       this.assignees = assignees;
       this.dueDate = dueDate;
       this.checked = checked;
+      this.rotational = rotational;
     }
   
     addAssignee(user) {
