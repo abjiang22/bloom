@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         width: '100%',
-    },
+    },   
     plantContainer: {
         justifyContent: 'flex-start',
         alignItems: 'center', 

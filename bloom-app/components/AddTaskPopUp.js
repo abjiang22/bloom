@@ -134,7 +134,7 @@ const style = StyleSheet.create({
   input: {
     borderWidth: 1.2,
     borderRadius: 8,
-    borderColor: '#2D6A6E', // Border color
+    borderColor: '#2D6A6E',
     padding: 10,
     marginBottom: 20,
     fontSize: 16,
@@ -171,21 +171,18 @@ const style = StyleSheet.create({
   },
   saveButton: {
     backgroundColor: '#2D6A6E', // Save button background color
-    borderRadius: 10,
+    borderRadius: 12,
     padding: 10,
   },
   cancelButton: {
     backgroundColor: '#aaa', // Cancel button background color
-    borderRadius: 10,
+    borderRadius: 12,
     padding: 10,
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-
-
-
+  }
 })
 export default AddTaskPopUp;
