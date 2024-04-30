@@ -173,12 +173,12 @@ const style = StyleSheet.create({
   },
   saveButton: {
     backgroundColor: '#2D6A6E', // Save button background color
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
   },
   cancelButton: {
     backgroundColor: '#aaa', // Cancel button background color
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
   },
   buttonText: {

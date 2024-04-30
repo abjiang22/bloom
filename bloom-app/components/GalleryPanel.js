@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   dropDownPicker: {
     borderWidth: 0,
-    width: '60%', 
+    width: '35%', 
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',

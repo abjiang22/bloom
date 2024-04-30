@@ -62,7 +62,7 @@ const ss = StyleSheet.create({
     maxHeight: 80
   },
   line: {
-    height: 3,
+    height: 1,
     backgroundColor: '#2D6A6E',
     width: '100%'
   },
