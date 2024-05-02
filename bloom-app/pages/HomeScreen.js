@@ -24,7 +24,7 @@ function HomeScreen() {
   const toggleTask = (taskToToggle) => {
     setTasks(prevTasks => prevTasks.map(task => {
         if (task === taskToToggle) {
-            const updatedTask = new Task(task.taskName, task.assignees, task.dueDate, !task.checked);
+            const updatedTask = new Task(task.taskName, task.assignees, task.dueDate, !task.checked, task.rotational, task.schedule, task.rotators);
             return updatedTask;
         }
         return task;

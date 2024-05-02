@@ -1,33 +1,51 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {Alert, Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DayPicker from './DayPicker';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAppContext } from '../AppContext';
-
-// import DraggableFlatList from 'react-native-draggable-flatlist';
+import { Task } from '../classes/Task';
 
 function AddScheduleTaskPopUp({ isVisible, onSave, onCancel }) {
   const [taskName, setTaskName] = useState('');
   const [description, setDescription] = useState('');
-  const [weekdays, setWeekdays] = useState([-1]);
+  const [weekdays, setWeekdays] = useState([]);
   const [rotation, setRotation] = useState([]);
   const { users, setUsers, tasks, setTasks } = useAppContext();
 
   const handleSave = () => {
-    onSave( {taskName, description, weekdays, rotation} );
+    if (rotation.length === 0) {
+      Alert.alert(
+        "Select Users",
+        "Assign the task to at least one user.",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+
+    if (weekdays.length === 0) {
+      Alert.alert(
+        "Select Days",
+        "Select at least one day for the weekly schedule.",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+
+    const newTask = new Task(taskName, assignees=rotation, dueDate=null, checked=false, rotational=true, schedule=weekdays, rotators=rotation);
+    onSave(newTask);
+    setTaskName('');
+    setWeekdays([]);
+    setDescription('');
+    setRotation([]);  
   };
 
-  const people = users.map(user => user.name);
-
-  const toggleRotation = (name) => {
-    setRotation((currentRotation) => {
-      const user = users.find(user => user.name === name);
-      const isUserInRotation = currentRotation.some(u => u.name === user.name);
-  
+  const toggleRotation = (userToToggle) => {
+    setRotation(currentRotation => {
+      const isUserInRotation = currentRotation.some(u => u.name === userToToggle.name);
       if (isUserInRotation) {
-        return currentRotation.filter(u => u.name !== user.name);
+        return currentRotation.filter(u => u.name !== userToToggle.name);
       } else {
-        return [...currentRotation, user];
+        return [...currentRotation, userToToggle];
       }
     });
   };
@@ -64,14 +82,14 @@ function AddScheduleTaskPopUp({ isVisible, onSave, onCancel }) {
                 />
               
               <Text style={style.modalTitle}>Assign to</Text>
-              {people.map((name) => (
+              {users.map((user) => (
                   <TouchableOpacity
-                      key={name}
+                      key={user.name}
                       style={style.rotationItem}
-                      onPress={() => toggleRotation(name)}
+                      onPress={() => toggleRotation(user)}
                   >     
-                  <Text>{name}</Text>
-                  <View style={rotation.includes(name) ? style.radioFilled : style.radioEmpty} />
+                  <Text>{user.name}</Text>
+                  <View style={rotation.some(u => u.name === user.name) ? style.radioFilled : style.radioEmpty} />
                   </TouchableOpacity>
               ))}
 
@@ -103,19 +121,16 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 30,
   },
-  // line: {
-  //   height: 3,
-  //   backgroundColor: '#2D6A6E',
-  //   width: '15%',
-  //   alignSelf: 'center',
-  // },
+
   modalView: {
     backgroundColor: 'white',
-    marginTop: -125,
+    marginTop: -205,
     padding: 20,
     alignItems: 'stretch',
     width: '100%',
-    maxHeight: '100%',
+    borderTopWidth: 2,
+    borderColor: '#2D6A6E',
+    borderRadius: 5
   },
   modalTitle: {
     marginBottom: 20,
@@ -177,8 +192,6 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-
-
 
 })
 export default AddScheduleTaskPopUp;

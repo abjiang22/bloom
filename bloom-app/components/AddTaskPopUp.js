@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
+import { Alert, Modal, View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import DayPicker from './DayPicker';
 import { ScrollView, TextInput, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useAppContext } from '../AppContext';
@@ -16,7 +16,15 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
   const { users, setUsers, tasks, setTasks } = useAppContext();
 
   const handleSave = () => {
-    const newTask = new Task(taskName, rotation, dueDate);
+    if (rotation.length === 0) {
+      Alert.alert(
+        "Select Users",
+        "Please assign the task to at least one user.",
+        [{ text: "OK" }]
+      );
+      return; 
+    }
+    const newTask = new Task(taskName, assignees=rotation, dueDate);
     onSave(newTask);
     setTaskName('');
     setDescription('');
@@ -30,12 +38,6 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
     setShowDatePicker(Platform.OS === 'android');
     setDueDate(currentDate);
   };
-
-  const people = ['Jessica', 'Cassie', 'Stephanie', 'Wendy'];
-
-  // const HorizontalLine = ({ ss }) => (
-  //   <View style={[style.line, ss]} />
-  // );
 
   const toggleRotation = (userToToggle) => {
     setRotation((currentRotation) => {
@@ -78,6 +80,7 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
                 onChange={handleDateChange}
               />
             )}
+
             <Text style={style.modalTitle}>Assign to</Text>
             {users.map((user) => (
                 <TouchableOpacity
@@ -119,8 +122,8 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     marginTop: -100,
     padding: 20,
-    alignItems: 'stretch', // Ensures children width stretch to fill the modal
-    width: '100%', // Modal width
+    alignItems: 'stretch',
+    width: '100%',
     borderTopWidth: 2,
     borderColor: '#2D6A6E',
     borderRadius: 5

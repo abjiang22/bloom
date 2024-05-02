@@ -1,10 +1,16 @@
 export class Task {
-    constructor(taskName, assignees = [], dueDate = null, checked = false, rotation = false) {
+    constructor(taskName, assignees = [], dueDate = null, checked = false, rotational = false, schedule = [], rotators = []) {
       this.taskName = taskName;
-      this.assignees = assignees;
       this.dueDate = dueDate;
       this.checked = checked;
-      this.rotation = false
+      this.rotational = rotational;
+      this.schedule = schedule;
+      this.rotators = rotators;
+      if (this.rotational == false) {
+        this.assignees = assignees;
+      } else {
+        this.assignees = this.rotators.length > 0 ? [this.rotators[0]] : [];
+      }
     }
   
     addAssignee(user) {
