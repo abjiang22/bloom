@@ -13,16 +13,16 @@ export const AppProvider = ({ children }) => {
   ]);
 
   const [tasks, setTasks] = useState([
-    new Task("Task 3", [users[0]], new Date()),
-    new Task("Task 4", [users[0]], new Date()),
-    new Task("Task 5", [users[1]], new Date()),
-    new Task("Task 6", [users[1]], new Date()),
-    new Task("Task 7", [users[2]], new Date()),
-    new Task("Task 8", [users[2]], new Date()),
-    new Task("Task 9", [users[3]], new Date()),
-    new Task("Task 10", [users[3]], new Date()),
-    new Task("Task 11", [users[3]], new Date()),
-    new Task("Task 12", [users[3]], new Date()),
+    new Task("Wash dishes", [users[0]], new Date()),
+    new Task("Clean floor", [users[0]], new Date()),
+    new Task("Water plants", [users[1]], new Date()),
+    new Task("Take out trash", [users[1]], new Date()),
+    new Task("Buy toilet paper", [users[2]], new Date()),
+    new Task("Buy new cups", [users[2]], new Date()),
+    new Task("Clean bathroom", [users[3]], new Date()),
+    new Task("Vacuum first floor", [users[3]], new Date()),
+    new Task("Scrub bathrub", [users[3]], new Date()),
+    new Task("Fix TV", [users[3]], new Date()),
   ]);
 
   return (
