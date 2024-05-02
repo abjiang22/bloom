@@ -6,6 +6,7 @@ import { useAppContext } from '../AppContext';
 import GalleryPanel from '../components/GalleryPanel';
 import Plant from '../components/Plant';
 import CompletionPercentage from '../components/CompletionPercent';
+import GroupFlower from '../components/GroupFlower'
 import AllTasksImage from '../components/AllTasks';
 import AddButton from '../components/AddButton';
 import {Task} from '../classes/Task'
@@ -75,7 +76,7 @@ function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.plantContainer}>
-      {activeViewIndex === 0 ? <AllTasksImage percentages={individualCompletionPercentages}/> : <Plant completionPercentage={completionPercentage} />}
+      {activeViewIndex === 0 ? <GroupFlower percentages={completionPercentage}/> : <Plant completionPercentage={completionPercentage} />}
       </View>
       <CompletionPercentage percentage={completionPercentage} name={activePerson} />
       <View style={styles.galleryContainer}>
