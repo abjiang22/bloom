@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, ScrollView } from 'react-native';
 import TaskItem from './TaskItem'
 
-const TaskList = ({ tasks, toggleTask }) => {
+const TaskList = ({ tasks, toggleTask, deleteTask }) => {
   return (
     <ScrollView style={styles.container}>
       {tasks.map((task, taskIndex) => (
@@ -10,6 +10,7 @@ const TaskList = ({ tasks, toggleTask }) => {
             key={`${taskIndex}`}
             task={task}
             toggleTask={() => toggleTask(task)}
+            deleteTask={() => deleteTask(task)}
         />
       ))}
     </ScrollView>

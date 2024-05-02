@@ -19,10 +19,6 @@ function AddScheduleTaskPopUp({ isVisible, onSave, onCancel }) {
 
   const people = users.map(user => user.name);
 
-  // const HorizontalLine = ({ ss }) => (
-  //   <View style={[style.line, ss]} />
-  // );
-
   const toggleRotation = (name) => {
     setRotation((currentRotation) => {
       const user = users.find(user => user.name === name);
@@ -65,10 +61,7 @@ function AddScheduleTaskPopUp({ isVisible, onSave, onCancel }) {
                   borderColor='#2D6A6E'
                   dayTextStyle = {{}}
                   itemStyles ={{}}
-                  wrapperStyles ={{
-                    marginTop: -20
-                  }} 
-              />
+                />
               
               <Text style={style.modalTitle}>Assign to</Text>
               {people.map((name) => (

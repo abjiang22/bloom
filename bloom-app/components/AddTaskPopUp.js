@@ -108,7 +108,7 @@ function AddTaskPopUp({ isVisible, onSave, onCancel }) {
 
 const style = StyleSheet.create({
   centeredView: {
-    marginTop: '30%',
+    marginTop: '50%',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -117,11 +117,13 @@ const style = StyleSheet.create({
   },
   modalView: {
     backgroundColor: 'white',
-    marginTop: -275,
+    marginTop: -100,
     padding: 20,
     alignItems: 'stretch', // Ensures children width stretch to fill the modal
     width: '100%', // Modal width
-    maxHeight: '100%', // Modal maximum height
+    borderTopWidth: 2,
+    borderColor: '#2D6A6E',
+    borderRadius: 5
   },
   modalTitle: {
     marginBottom: 10,

@@ -5,11 +5,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import TaskList from './TaskList';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const GalleryPanel = ({ names, tasks, toggleTask, onIndexChanged, activeIndex }) => {
+const GalleryPanel = ({ names, tasks, toggleTask, deleteTask, onIndexChanged, activeIndex }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(names[activeIndex]);
 
-  // Create items for DropDownPicker based on names
   const items = names.map((name, index) => ({
       label: name !== 'All' ? (name !== "Me" ? name + "'s Tasks" : "My Tasks") : "All Tasks",
       value: name,
@@ -20,16 +19,16 @@ const GalleryPanel = ({ names, tasks, toggleTask, onIndexChanged, activeIndex })
       setValue(names[activeIndex]);
   }, [activeIndex, names]);
 
-  const handleValueChange = (selectedValue) => {
-      const selectedIndex = names.indexOf(selectedValue);
-      if (selectedIndex !== activeIndex) {
-          onIndexChanged(selectedIndex);
-          setValue(selectedValue);
-      }
+  const handleValueChange = (item) => {
+    console.log("Selected item:", item);
+    const selectedIndex = names.indexOf(item.value);
+    if (selectedIndex !== activeIndex) {
+        setValue(item.value); 
+        onIndexChanged(selectedIndex);
+    }
   };
 
   const filteredTasks = value === 'All' ? tasks : tasks.filter(task => task.assignees.some(user => user.name === value));
-
     
   return (
     <Swiper
@@ -49,20 +48,25 @@ const GalleryPanel = ({ names, tasks, toggleTask, onIndexChanged, activeIndex })
           const filteredTasks = name === 'All' ? tasks : tasks.filter(task => task.assignees.some(user => user.name === name));
           return (
               <View key={index} style={styles.slide}>
-                  <DropDownPicker
-                      open={open}
-                      value={value}
-                      items={items}
-                      setOpen={setOpen}
-                      onChangeValue={handleValueChange}
-                      style={styles.dropDownPicker}
-                      labelStyle={styles.text}
-                      arrowIconStyle={styles.arrowIconStyle}
-                      dropDownStyle={styles.dropDownStyle}
-                      zIndex={3000}
-                      zIndexInverse={1000}
-                  />
-                  <TaskList tasks={filteredTasks} toggleTask={toggleTask}/>
+                    <DropDownPicker
+                        open={open}
+                        value={value}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        onSelectItem={(item) => {
+                          const selectedIndex = names.indexOf(item.value);
+                          setValue(item.value);
+                          onIndexChanged(selectedIndex);
+                        }}
+                        style={styles.dropDownPicker}
+                        labelStyle={styles.text}
+                        arrowIconStyle={styles.arrowIconStyle}
+                        dropDownStyle={styles.dropDownStyle}
+                        zIndex={3000}
+                        zIndexInverse={1000}
+                    />
+                  <TaskList tasks={filteredTasks} toggleTask={toggleTask} deleteTask={deleteTask} />
               </View>
           );
       })}

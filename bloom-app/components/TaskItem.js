@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
-const TaskItem = ({ task, toggleTask }) => {
+const TaskItem = ({ task, toggleTask, deleteTask }) => {
     return (
         <View style={[styles.taskItem, task.checked ? styles.checkedTaskItem : {}]}>
             <TouchableOpacity
@@ -11,6 +11,11 @@ const TaskItem = ({ task, toggleTask }) => {
             {task.checked && <View style={styles.innerCircle} />}
             </TouchableOpacity>
             <Text style={[styles.taskText, task.checked ? styles.checkedTaskText : {}]}>{task.taskName}</Text>
+            {task.checked && (
+                <TouchableOpacity onPress={() => deleteTask(task.id)} style={styles.deleteButton}>
+                    <Text style={styles.deleteButtonText}>X</Text>
+                </TouchableOpacity>
+            )}
         </View>
     );
 };
@@ -25,6 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 15,
     backgroundColor: '#FFFFFF',
+    justifyContent: 'space-between',
   },
   checkedTaskItem: {
     alignItems: 'center',
@@ -53,11 +59,24 @@ const styles = StyleSheet.create({
   taskText: {
     color: '#2D6A6E',
     fontSize: 18,
+    flex: 1,
   },
   checkedTaskText: {
     color: '#2D6A6E',
     fontSize: 18,
     textDecorationLine: 'line-through',
+  },
+  deleteButton: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontSize: 16,
   },
 });
 

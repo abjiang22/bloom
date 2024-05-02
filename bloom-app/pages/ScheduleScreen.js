@@ -60,7 +60,6 @@ const ss = StyleSheet.create({
   }, 
   img: {
     marginLeft: 30,
-    // png size
     maxWidth: 107,
     maxHeight: 80
   },

@@ -30,6 +30,10 @@ function HomeScreen() {
         return task;
     }));
   };
+
+  const deleteTask = (taskToDelete) => {
+    setTasks(currentTasks => currentTasks.filter(task => task !== taskToDelete));
+  };
   
   const names = useMemo(() => {
     const allNames = users.map(user => user.name);
@@ -37,10 +41,6 @@ function HomeScreen() {
   }, [users]);
 
   const activePerson = names[activeViewIndex];
-
-  const onPickerChange = (itemValue, itemIndex) => {
-    setActiveViewIndex(itemIndex);
-  };
 
   const calculateCompletionPercentage = (person) => {
     let filteredTasks = tasks.filter(task => 
@@ -85,6 +85,7 @@ function HomeScreen() {
             names={names}
             tasks={tasks} 
             toggleTask={toggleTask}
+            deleteTask={deleteTask}
             onIndexChanged={(index) => setActiveViewIndex(index)}
             activeIndex={activeViewIndex}
           />
