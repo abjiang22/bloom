@@ -16,7 +16,9 @@ async function loadFonts() {
   await Font.loadAsync({
     'RoundedMplus1c-Regular': require('./assets/fonts/MPLUSRounded1c-Regular.ttf'),
     'RoundedMplus1c-Bold': require('./assets/fonts/MPLUSRounded1c-Bold.ttf'),
-    'RoundedMplus1c-ExtraBold': require('./assets/fonts/MPLUSRounded1c-ExtraBold.ttf')
+    'RoundedMplus1c-ExtraBold': require('./assets/fonts/MPLUSRounded1c-ExtraBold.ttf'),
+    'RoundedMplus1c-Light': require('./assets/fonts/MPLUSRounded1c-Light.ttf'),
+    'RoundedMplus1c-Medium': require('./assets/fonts/MPLUSRounded1c-Medium.ttf')
   });
 }
 

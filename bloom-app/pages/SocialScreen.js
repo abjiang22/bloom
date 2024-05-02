@@ -25,12 +25,15 @@ function SocialScreen({navigation}) {
   };
 
   const roommates = useMemo(() => {
-    return users.map(user => ({
+    // Map over users and calculate percentages inline
+    const mappedRoommates = users.map(user => ({
       name: user.name,
-      percentage: individualCompletionPercentages,
-    }))
-  }, [users, tasks]);
+      percentage: calculateCompletionPercentage(user.name),  // Calculate directly here
+    }));
 
+    // Sort roommates by the calculated percentage in descending order
+    return mappedRoommates.sort((a, b) => b.percentage - a.percentage);
+  }, [users, tasks]);
 
   const individualCompletionPercentages = useMemo(() => {
     const uniqueAssignees = new Set();
@@ -45,6 +48,7 @@ function SocialScreen({navigation}) {
 
     completionPercentages['All'] = calculateCompletionPercentage('All', tasks);
 
+
     return completionPercentages;
   }, [tasks]);
 
@@ -54,7 +58,7 @@ function SocialScreen({navigation}) {
       <View style={ss.garden}>
       <AllTasksImage percentages={individualCompletionPercentages} />
       </View>
-      <RoommatesList roommates={roommates} percentages={individualCompletionPercentages}/>
+      <RoommatesList roommates={roommates}/>
     </View>
   );
 };

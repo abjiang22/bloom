@@ -35,8 +35,8 @@ const AllTasksImage = ({ percentages }) => {
     <View style={styles.container}>
       <Image source={require(allTasksImagePath)} style={styles.image} />
       {Object.entries(percentages).map(([person, percentage], index) => (
-        <View key={index} style={{ position: 'absolute', left: 100 * index, top: 0, padding: 10 }}>
-          <Image source={selectFlower(percentage)} style={{ width: 100, height: 200 }} />
+        <View key={index} style={{ position: 'absolute', left: 100 * index, top: 80, padding: 10 }}>
+          <Image source={selectFlower(percentage)} style={{ width: 70, height: 120 }} />
           <Text style={styles.text}>{person === 'My' ? 'Me' : person}</Text>
         </View>
       ))}
@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
   text: {
     color: '#ffffff',
     marginTop: 0,
-    fontSize: 18,
+    fontSize: 15,
     fontFamily: 'RoundedMplus1c-ExtraBold',
-    left: 20,
+    left: 18,
   }
 });
 
