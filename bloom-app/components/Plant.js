@@ -22,11 +22,11 @@ function Plant({ completionPercentage }) {
         } else if (percentage > 45 && percentage <= 60) {
             return <Image source={Plant4} style={styles.plant4} />;
         } else if (percentage > 60 && percentage <= 75) {
-            return <Image source={Plant5} style={styles.plant1} />;
+            return <Image source={Plant5} style={styles.plant4} />;
         } else if (percentage > 75 && percentage <= 90) {
-            return <Image source={Plant6} style={styles.plant1} />;
+            return <Image source={Plant6} style={styles.plant4} />;
         } else if (percentage > 90 && percentage <= 99) {
-            return <Image source={Plant7} style={styles.plant1} />;
+            return <Image source={Plant7} style={styles.plant4} />;
         } else {
             return <Image source={Plant8} style={styles.plant8} />;
         }

@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#2D6A6E',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'RoundedMplus1c-ExtraBold',
+
   },
   item: {
     flexDirection: 'row',

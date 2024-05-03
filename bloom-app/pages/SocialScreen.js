@@ -1,14 +1,11 @@
 import {StatusBar} from 'expo-status-bar';
 import {View, Image, StyleSheet} from 'react-native';
-
 import React, { useState, useMemo } from 'react';
-import SimpleButton from '../components/SimpleButton';
-import Logo from '../components/Logo';
 import RoommatesList from '../components/RoommatesList';
 import {styles} from './AppStyles';
 import AllTasksImage from '../components/AllTasks';
 import { useAppContext } from '../AppContext';
-import {Task} from '../classes/Task'
+
 
 
 function SocialScreen({navigation}) {
