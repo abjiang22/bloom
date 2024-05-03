@@ -16,7 +16,7 @@ const RoommatesList = ({ roommates }) => {
                 <Text style={[styles.index, { color: index === 0 ? 'white' : '#2D6A6E' }]}>{index + 1}</Text>
             </View>
             <Text style={styles.name}>{roommate.name}</Text>
-            <Text style={styles.percentage}>{roommate.percentage}%</Text>
+            <Text style={styles.percentage}>{Math.round(roommate.percentage)}%</Text>
           </View>
         </View>
       ))}

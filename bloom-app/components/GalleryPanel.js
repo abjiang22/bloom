@@ -63,6 +63,8 @@ const GalleryPanel = ({ names, tasks, toggleTask, deleteTask, onIndexChanged, ac
                         labelStyle={styles.text}
                         arrowIconStyle={styles.arrowIconStyle}
                         dropDownStyle={styles.dropDownStyle}
+                        dropDownContainerStyle={styles.dropDownContainer} // Style for the container
+                        itemStyle={styles.dropDownItem} // Style for each item
                         zIndex={3000}
                         zIndexInverse={1000}
                     />
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     textAlign: 'center',
   },
+
   buttonWrapper: {
     alignItems: 'flex-start',
     paddingTop: 10,
@@ -104,11 +107,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+
   },
+
+  dropDownStyle: {
+    color: '#2D6A6E',
+    fontFamily: 'RoundedMplus1c-Regular'
+
+  },
+  dropDownContainerStyle: {
+    borderColor: '#2D6A6E',
+    fontFamily: 'RoundedMplus1c-Regular',
+    color: '#2D6A6E',
+  },
+
+  itemStyle: {
+    color: '#2D6A6E',
+    fontFamily: 'RoundedMplus1c-Regular'
+
+  },
+
   arrowIconStyle: {
     width: 25,
     height: 25,
-    position: 'relative'
+    position: 'relative',
   }
 });
 

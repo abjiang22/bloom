@@ -28,7 +28,10 @@ function ProfileScreen({ navigation }) {
         <MaterialIcons name="navigate-next" size={24} color="#ccc" />
       </View>
 
-      <TouchableOpacity style={styles.logoutButton}>
+      <TouchableOpacity 
+      style={styles.logoutButton}
+      onPress={() => navigation.navigate('Landing')}>
+        
         <Text style={styles.logoutButtonText}>Logout</Text>
       </TouchableOpacity>
     </View>
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
     color: '#2D6A6E',
     fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: 'RoundedMplus1c-ExtraBold',
   },
   avatarContainer: {
     alignItems: 'center',
@@ -61,6 +65,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#2D6A6E',
     marginTop: 10,
+    fontFamily: 'RoundedMplus1c-Regular',
   },
   menuItem: {
     flexDirection: 'row',
@@ -76,6 +81,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     marginRight: 10,
+    fontFamily: 'RoundedMplus1c-Regular',
   },
   logoutButton: {
     marginTop: 20,
@@ -90,6 +96,7 @@ const styles = StyleSheet.create({
   logoutButtonText: {
     color: '#2D6A6E',
     fontSize: 16,
+    fontFamily: 'RoundedMplus1c-Regular',
   },
 });
 

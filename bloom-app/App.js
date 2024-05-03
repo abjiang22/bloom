@@ -38,6 +38,7 @@ function App() {
     <AppProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
+
           <Stack.Screen name="Landing" component={LandingPage} options={{ headerShown: false }} />
           <Stack.Screen name="LoginPage" component={LoginPage} options={{ headerShown: false }} />
           <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />

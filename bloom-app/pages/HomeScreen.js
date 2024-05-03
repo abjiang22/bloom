@@ -20,15 +20,22 @@ function HomeScreen() {
   const [activeViewIndex, setActiveViewIndex] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const sortTasks = (tasks) => {
+    return tasks.sort((a, b) => a.checked === b.checked ? 0 : a.checked ? 1 : -1);
+  };
+
 
   const toggleTask = (taskToToggle) => {
-    setTasks(prevTasks => prevTasks.map(task => {
+    setTasks(prevTasks => {
+      const updatedTasks = prevTasks.map(task => {
         if (task === taskToToggle) {
             const updatedTask = new Task(task.taskName, task.assignees, task.dueDate, !task.checked, task.rotational, task.schedule, task.rotators);
             return updatedTask;
         }
         return task;
-    }));
+    });
+    return sortTasks(updatedTasks);
+    });
   };
 
   const deleteTask = (taskToDelete) => {
@@ -69,7 +76,7 @@ function HomeScreen() {
   }, [tasks]);
 
   const handleSaveTask = (newTask) => {
-    setTasks(currentTasks => [...currentTasks, newTask]);
+    setTasks(currentTasks => sortTasks([...currentTasks, newTask]));
     setModalVisible(false);
   };
   
